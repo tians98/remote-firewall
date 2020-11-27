@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo insmod firewall.ko blockExternal=$1 myIp=$2 myPort=$3
+
+
