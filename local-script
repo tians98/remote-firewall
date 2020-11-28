@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BLOCK=$(zenity --entry --text "Block external website?(1=yes/2=no)")
+IP=$(zenity --entry --text "What ip address to block?(enter the full address enclosed by "")")
+PORT=$(zenity --entry --text "What port number to block?(enter an integer)")
+sudo insmod firewall.ko blockExternal=$BLOCK myIp=$IP myPort=$PORT
