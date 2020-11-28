@@ -1,7 +1,27 @@
 #!/bin/bash
 
 make
-BLOCK=$(zenity --entry --text "Block external website?(1=yes/2=no)")
+
+# commands to lookup the ip address of a domain
+LOOKUP=$(zenity --entry --text "Look up a domain ip address?(1=yes/0=no)")
+while [ $LOOKUP -gt 0 ]
+do
+	DM=$(zenity --entry --text "Enter a domain name(i.e. google.com):")
+	OUTPUT=$(dig $DM +short)
+	zenity --info --title="IP address of $DM" --text="$OUTPUT"
+	LOOKUP=$(zenity --entry --text "Look up a domain ip address?(1=yes/0=no)")
+done
+
+# commands to get user's decision of which port or ip address to block
+BLOCK=$(zenity --entry --text "Block external website?(1=yes/0=no)")
 IP=$(zenity --entry --text "What ip address to block?(enter the full address enclosed by "")")
 PORT=$(zenity --entry --text "What port number to block?(enter an integer)")
 sudo insmod firewall.ko blockExternal=$BLOCK myIp=$IP myPort=$PORT
+
+# commands to set the timer for the blocking
+TIME=$(zenity --entry --text "How many seconds do you want to block?(0=infinitely, need to unload module manualy)")
+if [ $TIME -gt 0 ]
+then
+	sleep $TIME
+	sudo rmmod firewall.ko
+fi

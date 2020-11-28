@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# generate keys so that don't need to enter confidentials repeatly
 ssh-keygen
 ssh-copy-id -i $1
+
+# transfer minimal files needed for compiling and inserting the firewall module
 ssh $1 "mkdir ~/firewall"
 scp firewall.c Makefile $1:~/firewall
+
+# compile and inseat firewall module
 ssh $1 "cd firewall; make;"
 ssh -t $1 "cd firewall; sudo insmod firewall.ko blockExternal=$2 myIp=$3 myPort=$4"
