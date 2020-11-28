@@ -1,4 +1,8 @@
 #!/bin/bash
 
-scp firewall.c Makefile $1:~
-ssh -t $1 "make && sudo insmod firewall.ko blockExternal=$2 myIp=$3 myPort=$4"
+ssh-keygen
+ssh-copy-id -i $1
+ssh $1 "mkdir ~/firewall"
+scp firewall.c Makefile $1:~/firewall
+ssh $1 "cd firewall; make;"
+ssh -t $1 "cd firewall; sudo insmod firewall.ko blockExternal=$2 myIp=$3 myPort=$4"
