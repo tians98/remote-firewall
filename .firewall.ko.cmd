@@ -1,1 +1,1 @@
-cmd_/home/tians9801/CS3891Final/firewall.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/tians9801/CS3891Final/firewall.ko /home/tians9801/CS3891Final/firewall.o /home/tians9801/CS3891Final/firewall.mod.o;  true
+cmd_/home/tians9801/remote-firewall/firewall.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/tians9801/remote-firewall/firewall.ko /home/tians9801/remote-firewall/firewall.o /home/tians9801/remote-firewall/firewall.mod.o;  true
