@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ssh -t $1 sudo rmmod firewall.ko
