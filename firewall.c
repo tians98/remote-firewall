@@ -15,13 +15,17 @@ MODULE_DESCRIPTION("Customed Linux Kernel Firewall");
   
 MODULE_VERSION("1.1");
 
+// input parameters to the module indicating ip address, port number, and block
 static char *myIp = "";
 static int myPort = 2;
 static int blockExternal = 3;
+
+// initialize packet hooks
 static struct nf_hook_ops ipFilterHook;
 static struct nf_hook_ops portFilterHook;
 static struct nf_hook_ops externalFilterHook;
 
+// extract input parameter
 module_param(myIp, charp, 0000);
 MODULE_PARM_DESC(myIp, "A string");
 module_param(myPort, int, 0000);
